@@ -3,7 +3,7 @@
 # Copyright (C) 2013-2014 Miguel Martin (miguel@miguel-martin.com)    	 #
 # ====================================================================== #
 
-cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
