@@ -58,9 +58,6 @@ set(ANAX_MAX_AMOUNT_OF_COMPONENTS 64 CACHE INTEGER "The maximum amount of compon
 # set up the configure file for the library
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/anax/Config.hpp.inl ${CMAKE_CURRENT_BINARY_DIR}/include/anax/Config.hpp)
 
-# Add include directories
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/include)
 
 # Determine if we're building a shared (dynamic) library
 # And set appropriate suffixes for the executables
@@ -97,6 +94,10 @@ endif()
 # Add the library
 add_library(${ANAX_LIBRARY_NAME} ${ANAX_LIBRARY_SOURCES})
 
+# Set include directories
+target_include_directories(${ANAX_LIBRARY_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(${ANAX_LIBRARY_NAME} PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/include)
+
 # Build tests if we need to
 if(BUILD_TESTS)
     enable_testing()
@@ -125,7 +126,7 @@ if(BUILD_DOCS)
                                 COMMAND ${DOXYGEN_EXECUTABLE} ${doxyfile}
                                 # The following should be ${doxyfile} only but it
                                 # will break the dependency.
-                                # The optimal solution would be creating a 
+                                # The optimal solution would be creating a
                                 # custom_command for ${doxyfile} generation
                                 # but I still have to figure out how...
                                 MAIN_DEPENDENCY ${doxyfile} ${doxyfile_in}
